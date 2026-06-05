@@ -9,7 +9,8 @@ import pytz
 from collections import OrderedDict
 
 # --- সেটিংস ---
-BASE_URL = "https://roxiestreams.info"
+# GitHub Secrets থেকে BASE_URL নেওয়া হবে, না থাকলে ডিফল্টটি ব্যবহার করবে
+BASE_URL = os.getenv("BASE_URL")
 OUTPUT_FILE = "Roxi.json"
 
 CATEGORIES = {
@@ -23,10 +24,11 @@ def get_ist_time():
 
 def push_to_github():
     print(f"[-] GitHub এ {OUTPUT_FILE} আপডেট করা হচ্ছে...")
-    GITHUB_TOKEN = "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"
-    GITHUB_USER = "api00007"
-    GITHUB_REPO = "Roxi"
-    GITHUB_EMAIL = "api00007@gmail.com"
+    # GitHub Secrets থেকে সংবেদনশীল তথ্যগুলো সংগ্রহ করা হচ্ছে
+    GITHUB_TOKEN = os.getenv("GH_TOKEN")
+    GITHUB_USER = os.getenv("GITHUB_USER")
+    GITHUB_REPO = os.getenv("GITHUB_REPO")
+    GITHUB_EMAIL = os.getenv("GITHUB_EMAIL")
     
     remote_url = f"https://{GITHUB_TOKEN}@github.com/{GITHUB_USER}/{GITHUB_REPO}.git"
 
