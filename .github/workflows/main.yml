@@ -24,4 +24,10 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Scraper
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          TGITHUB_EMAIL: ${{ secrets.TGITHUB_EMAIL }}
+          TGITHUB_REPO: ${{ secrets.TGITHUB_REPO }}
+          TGITHUB_USER: ${{ secrets.TGITHUB_USER }}
         run: python roxi_scraper.py
