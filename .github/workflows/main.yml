@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false # ক্যাশ করা ক্রেডেনশিয়াল নিষ্ক্রিয় করা হলো
 
       - name: Set up Python
         uses: actions/setup-python@v4
