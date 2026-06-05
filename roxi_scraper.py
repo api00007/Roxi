@@ -10,7 +10,7 @@ from collections import OrderedDict
 
 # --- সেটিংস ---
 BASE_URL = "https://roxiestreams.info"
-OUTPUT_FILE = "data.json"
+OUTPUT_FILE = "Roxi.json"
 
 CATEGORIES = {
     "Soccer": "/soccer", "NBA": "/nba", "MLB": "/mlb",
@@ -23,7 +23,6 @@ def get_ist_time():
 
 def push_to_github():
     print(f"[-] GitHub এ {OUTPUT_FILE} আপডেট করা হচ্ছে...")
-    # আপনার লেটেস্ট ডিটেইলস
     GITHUB_TOKEN = "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"
     GITHUB_USER = "api00007"
     GITHUB_REPO = "Roxi"
@@ -48,7 +47,6 @@ def run_scraper():
     scraper = cloudscraper.create_scraper(browser={'browser': 'chrome', 'platform': 'android', 'desktop': False})
     all_live_matches = []
     
-    # ডোমেইন লিস্ট সংগ্রহ
     try:
         dom_res = scraper.get(f"{BASE_URL}/domainsz29.txt", timeout=15)
         domains_list = [d.strip() for d in dom_res.text.split('\n') if d.strip()]
@@ -62,9 +60,7 @@ def run_scraper():
             matches = re.findall(r'href=["\']([^"\']+)["\'][^>]*>(.*?)</a>', res.text, re.S | re.I)
             
             for m_url, m_text in matches:
-                # অপ্রয়োজনীয় মেনু লিঙ্ক ফিল্টার
                 if len(m_url) < 10 or any(x in m_url for x in ['multiview', 'discord', 'contact']): continue
-                
                 clean_rivals = re.sub('<[^<]+?>', '', m_text).strip()
                 full_m_url = m_url if m_url.startswith("http") else f"{BASE_URL}/{m_url.lstrip('/')}"
                 
@@ -78,9 +74,12 @@ def run_scraper():
                     
                     if streams:
                         for idx, (path, sub) in enumerate(streams, 1):
-                            r_dom = random.choice(domains_list)
-                            # রিফারার ছাড়া ক্লিন লিঙ্ক তৈরি
-                            final_link = f"https://{sub}.{r_dom}/{path.lstrip('/')}"
+                            # ডাবল ইউআরএল ফিক্স (যদি পাথে অলরেডি http থাকে)
+                            if path.startswith("http"):
+                                final_link = path
+                            else:
+                                r_dom = random.choice(domains_list)
+                                final_link = f"https://{sub}.{r_dom}/{path.lstrip('/')}"
                             
                             all_live_matches.append(OrderedDict([
                                 ("Id", str(len(all_live_matches) + 1)),
@@ -93,9 +92,13 @@ def run_scraper():
                         path_match = re.search(r"['\"]([^'\"]+\.m3u8[^'\"]*)['\"]", m_html)
                         sub_match = re.search(r"subdomain\s*=\s*['\"]([^'\"]+)['\"]", m_html)
                         if path_match:
-                            sub = sub_match.group(1) if sub_match else "601"
-                            r_dom = random.choice(domains_list)
-                            final_link = f"https://{sub}.{r_dom}/{path_match.group(1).lstrip('/')}"
+                            p = path_match.group(1)
+                            if p.startswith("http"):
+                                final_link = p
+                            else:
+                                sub = sub_match.group(1) if sub_match else "601"
+                                r_dom = random.choice(domains_list)
+                                final_link = f"https://{sub}.{r_dom}/{p.lstrip('/')}"
                             
                             all_live_matches.append(OrderedDict([
                                 ("Id", str(len(all_live_matches) + 1)),
@@ -106,7 +109,6 @@ def run_scraper():
                 except: continue
         except: continue
 
-    # আপনার দেওয়া নির্দিষ্ট ফরম্যাটে ডাটা সাজানো
     if all_live_matches:
         final_package = OrderedDict([
             ("Owner", "Ivan-FluX"),
@@ -119,11 +121,7 @@ def run_scraper():
         
         with open(OUTPUT_FILE, "w") as f:
             json.dump(final_package, f, indent=4)
-        
-        print(f"[OK] মোট {len(all_live_matches)}টি ম্যাচ সংগ্রহ করা হয়েছে।")
         push_to_github()
-    else:
-        print("[!] কোনো ডাটা পাওয়া যায়নি।")
 
 if __name__ == "__main__":
     run_scraper()
