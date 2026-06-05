@@ -4,12 +4,12 @@ import json
 import random
 import time
 import os
+import shutil
 from datetime import datetime
 import pytz
 from collections import OrderedDict
 
 # --- সেটিংস ---
-# কোনো হার্ডকোডেড ব্যাকআপ ইউআরএল রাখা হয়নি, সরাসরি সিক্রেট থেকে রিড করবে
 BASE_URL = os.getenv("BASE_URL")
 OUTPUT_FILE = "Roxi.json"
 
@@ -23,30 +23,54 @@ def get_ist_time():
     return datetime.now(ist).strftime('%d/%m/%y %H:%M:%S IST')
 
 def push_to_github():
-    print(f"[-] GitHub এ {OUTPUT_FILE} আপডেট করা হচ্ছে...")
-    # আপনার নতুন সিক্রেট নাম অনুযায়ী লোড করা হচ্ছে
+    print(f"[-] অন্য GitHub রিপোজিটরিতে {OUTPUT_FILE} আপডেট করা হচ্ছে...")
     GITHUB_TOKEN = os.getenv("GH_TOKEN")
     GITHUB_USER = os.getenv("TGITHUB_USER")
     GITHUB_REPO = os.getenv("TGITHUB_REPO")
     GITHUB_EMAIL = os.getenv("TGITHUB_EMAIL")
     
+    # একটি আলাদা অস্থায়ী ডিরেক্টরি নাম
+    temp_dir = "temp_external_repo"
     remote_url = f"https://{GITHUB_TOKEN}@github.com/{GITHUB_USER}/{GITHUB_REPO}.git"
 
     try:
-        os.system(f'git config --global user.email "{GITHUB_EMAIL}"')
-        os.system(f'git config --global user.name "{GITHUB_USER}"')
-        os.system(f"git remote set-url origin {remote_url}")
-        os.system("git fetch origin main")
+        # ১. আগের কোনো টেম্পোরারি ফোল্ডার থাকলে তা মুছে ফেলা
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir)
+            
+        # ২. অন্য রিপোজিটরিটি একদম নতুনভাবে ক্লোন করা
+        clone_status = os.system(f"git clone {remote_url} {temp_dir}")
+        if clone_status != 0:
+            raise Exception("Git Clone ব্যর্থ হয়েছে। দয়া করে টোকেন ও রিপোজিটরি নাম চেক করুন।")
+        
+        # ৩. সদ্য স্ক্র্যাপ করা Roxi.json ফাইলটি ক্লোন করা ফোল্ডারে কপি করা
+        shutil.copy(OUTPUT_FILE, os.path.join(temp_dir, OUTPUT_FILE))
+        
+        # ৪. ক্লোন ফোল্ডারের ভেতর প্রবেশ করে কনফিগার, কমিট ও পুশ করা
+        current_dir = os.getcwd()
+        os.chdir(temp_dir)
+        
+        os.system(f'git config user.email "{GITHUB_EMAIL}"')
+        os.system(f'git config user.name "{GITHUB_USER}"')
         os.system(f"git add {OUTPUT_FILE}")
         os.system(f'git commit -m "Auto Update: {get_ist_time()}" || echo "No changes"')
-        os.system("git pull origin main --rebase -X ours")
-        os.system("git push origin main")
-        print(f"[SUCCESS] {OUTPUT_FILE} আপডেট সম্পন্ন।")
+        push_status = os.system("git push origin main")
+        
+        # ৫. কাজ শেষে আবার আগের প্রধান ডিরেক্টরিতে ফিরে আসা
+        os.chdir(current_dir)
+        
+        # অস্থায়ী ফোল্ডারটি মুছে ফেলা
+        shutil.rmtree(temp_dir)
+        
+        if push_status == 0:
+            print(f"[SUCCESS] অন্য রিপোজিটরিতে {OUTPUT_FILE} সফলভাবে আপডেট সম্পন্ন।")
+        else:
+            print("[ERROR] পুশ কমান্ড সফল হয়নি।")
+            
     except Exception as e:
         print(f"[ERROR] পুশ ফেইল: {e}")
 
 def run_scraper():
-    # যদি কোনো কারণে BASE_URL খালি থাকে, তবে স্ক্রিপ্টটি যেন কাজ না করে
     if not BASE_URL:
         print("[ERROR] BASE_URL পাওয়া যায়নি! দয়া করে গিটহাব সিক্রেট চেক করুন।")
         return
@@ -81,7 +105,6 @@ def run_scraper():
                     
                     if streams:
                         for idx, (path, sub) in enumerate(streams, 1):
-                            # ডাবল ইউআরএল ফিক্স (যদি পাথে অলরেডি http থাকে)
                             if path.startswith("http"):
                                 final_link = path
                             else:
@@ -95,7 +118,6 @@ def run_scraper():
                                 ("Link", final_link)
                             ]))
                     else:
-                        # যদি getRandomStream না থাকে তবে ডাইরেক্ট m3u8 চেক
                         path_match = re.search(r"['\"]([^'\"]+\.m3u8[^'\"]*)['\"]", m_html)
                         sub_match = re.search(r"subdomain\s*=\s*['\"]([^'\"]+)['\"]", m_html)
                         if path_match:
