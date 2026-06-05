@@ -24,7 +24,7 @@ def get_ist_time():
 def push_to_github():
     print(f"[-] GitHub এ {OUTPUT_FILE} আপডেট করা হচ্ছে...")
     # আপনার ALL-ROUNDER রিপোজিটরির ডিটেইলস
-    GITHUB_TOKEN = "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"
+    GITHUB_TOKEN = "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"
     GITHUB_USER = "sptvhelpdesk-ship-it"
     GITHUB_REPO = "ALL-ROUNDER"
     GITHUB_EMAIL = "sptvhelpdesk@gmail.com"
