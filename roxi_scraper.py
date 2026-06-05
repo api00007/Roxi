@@ -23,10 +23,10 @@ def get_ist_time():
 
 def push_to_github():
     print(f"[-] GitHub এ {OUTPUT_FILE} আপডেট করা হচ্ছে...")
-    GITHUB_TOKEN = "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"
-    GITHUB_USER = "sptvhelpdesk-ship-it"
-    GITHUB_REPO = "ALL-ROUNDER"
-    GITHUB_EMAIL = "sptvhelpdesk@gmail.com"
+    GITHUB_TOKEN = "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"
+    GITHUB_USER = "api00007"
+    GITHUB_REPO = "Roxi"
+    GITHUB_EMAIL = "api00007@gmail.com"
     
     remote_url = f"https://{GITHUB_TOKEN}@github.com/{GITHUB_USER}/{GITHUB_REPO}.git"
 
