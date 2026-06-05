@@ -2,8 +2,10 @@ name: Roxi Auto Scraper
 
 on:
   schedule:
-    - cron: '*/20 * * * *' # প্রতি ২০ মিনিট পরপর চলবে
+    - cron: '*/20 * * * *' # প্রতি ২০ মিনিট পরপর চলবে (গিটহাবের ব্যাকআপ শিডিউলার)
   workflow_dispatch: 
+  repository_dispatch:
+    types: [external-trigger] # এই নতুন অংশটি বাহ্যিক ট্রিগার গ্রহণের জন্য যুক্ত করা হলো
 
 jobs:
   build:
@@ -13,7 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          persist-credentials: false # ক্যাশ করা ক্রেডেনশিয়াল নিষ্ক্রিয় করা হলো
+          persist-credentials: false
 
       - name: Set up Python
         uses: actions/setup-python@v4
