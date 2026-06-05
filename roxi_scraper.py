@@ -9,7 +9,7 @@ import pytz
 from collections import OrderedDict
 
 # --- সেটিংস ---
-# GitHub Secrets থেকে BASE_URL নেওয়া হবে, না থাকলে ডিফল্টটি ব্যবহার করবে
+# কোনো হার্ডকোডেড ব্যাকআপ ইউআরএল রাখা হয়নি, সরাসরি সিক্রেট থেকে রিড করবে
 BASE_URL = os.getenv("BASE_URL")
 OUTPUT_FILE = "Roxi.json"
 
@@ -24,11 +24,11 @@ def get_ist_time():
 
 def push_to_github():
     print(f"[-] GitHub এ {OUTPUT_FILE} আপডেট করা হচ্ছে...")
-    # GitHub Secrets থেকে সংবেদনশীল তথ্যগুলো সংগ্রহ করা হচ্ছে
+    # আপনার নতুন সিক্রেট নাম অনুযায়ী লোড করা হচ্ছে
     GITHUB_TOKEN = os.getenv("GH_TOKEN")
-    GITHUB_USER = os.getenv("GITHUB_USER")
-    GITHUB_REPO = os.getenv("GITHUB_REPO")
-    GITHUB_EMAIL = os.getenv("GITHUB_EMAIL")
+    GITHUB_USER = os.getenv("TGITHUB_USER")
+    GITHUB_REPO = os.getenv("TGITHUB_REPO")
+    GITHUB_EMAIL = os.getenv("TGITHUB_EMAIL")
     
     remote_url = f"https://{GITHUB_TOKEN}@github.com/{GITHUB_USER}/{GITHUB_REPO}.git"
 
@@ -46,6 +46,11 @@ def push_to_github():
         print(f"[ERROR] পুশ ফেইল: {e}")
 
 def run_scraper():
+    # যদি কোনো কারণে BASE_URL খালি থাকে, তবে স্ক্রিপ্টটি যেন কাজ না করে
+    if not BASE_URL:
+        print("[ERROR] BASE_URL পাওয়া যায়নি! দয়া করে গিটহাব সিক্রেট চেক করুন।")
+        return
+
     scraper = cloudscraper.create_scraper(browser={'browser': 'chrome', 'platform': 'android', 'desktop': False})
     all_live_matches = []
     
