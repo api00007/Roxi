@@ -2,152 +2,188 @@
     "Owner": "Ivan-FluX",
     "Telegram": "https://t.me/iVan_flux",
     "App name": "fawna-auto-scrape-api",
-    "Last update": "05/06/26 14:00:16 IST",
-    "Total_Matches": 24,
+    "Last update": "05/06/26 14:29:04 IST",
+    "Total_Matches": 30,
     "Live_Data": [
         {
             "Id": "1",
             "Rivels": "Singapore vs China",
             "Title": "Soccer (S-1)",
-            "Link": "https://601.sandhost.qzz.io/cyrus.m3u8"
+            "Link": "https://601.thelistener.pk/cyrus.m3u8"
         },
         {
             "Id": "2",
-            "Rivels": "Puerto Rico vs Saudi Arabia",
+            "Rivels": "Slovakia vs Montenegro",
             "Title": "Soccer (S-1)",
-            "Link": "https://daffodil.formaturamaxi.com.br/fs2.m3u8"
+            "Link": "https://daffodil.sandhost.qzz.io/fubo.m3u8"
         },
         {
             "Id": "3",
+            "Rivels": "Moldova vs Bulgaria",
+            "Title": "Soccer (S-1)",
+            "Link": "https://daffodil.sandhost.qzz.io/fsp.m3u8"
+        },
+        {
+            "Id": "4",
+            "Rivels": "Hungary vs Finland",
+            "Title": "Soccer (S-1)",
+            "Link": "https://daffodil.formaturamaxi.com.br/la.m3u8"
+        },
+        {
+            "Id": "5",
+            "Rivels": "Hungary vs Finland",
+            "Title": "Soccer (S-2)",
+            "Link": "https://601.formaturamaxi.com.br/la.m3u8"
+        },
+        {
+            "Id": "6",
+            "Rivels": "Paraguay vs Nicaragua",
+            "Title": "Soccer (S-1)",
+            "Link": "https://daffodil.formaturamaxi.com.br/fsp.m3u8"
+        },
+        {
+            "Id": "7",
+            "Rivels": "Paraguay vs Nicaragua",
+            "Title": "Soccer (S-2)",
+            "Link": "https://601.thelistener.pk/sky.m3u8"
+        },
+        {
+            "Id": "8",
+            "Rivels": "Puerto Rico vs Saudi Arabia",
+            "Title": "Soccer (S-1)",
+            "Link": "https://daffodil.thelistener.pk/fs2.m3u8"
+        },
+        {
+            "Id": "9",
             "Rivels": "Canada vs Ireland",
             "Title": "Soccer (S-1)",
             "Link": "https://601.sandhost.qzz.io/tudnmx.m3u8"
         },
         {
-            "Id": "4",
+            "Id": "10",
             "Rivels": "Canada vs Ireland",
             "Title": "Soccer (S-2)",
-            "Link": "https://601.sandhost.qzz.io/foxd.m3u8"
+            "Link": "https://601.formaturamaxi.com.br/foxd.m3u8"
         },
         {
-            "Id": "5",
+            "Id": "11",
             "Rivels": "New York Knicks vs San Antonio Spurs",
             "Title": "NBA (S-1)",
             "Link": "https://daffodil.sandhost.qzz.io/nba.m3u8"
         },
         {
-            "Id": "6",
+            "Id": "12",
             "Rivels": "New York Knicks vs San Antonio Spurs",
             "Title": "NBA (S-2)",
-            "Link": "https://601.formaturamaxi.com.br/nba.m3u8"
+            "Link": "https://601.sandhost.qzz.io/nba.m3u8"
         },
         {
-            "Id": "7",
+            "Id": "13",
             "Rivels": "San Francisco Giants vs Chicago Cubs",
             "Title": "MLB (S-1)",
-            "Link": "https://601.formaturamaxi.com.br/mlb.m3u8"
+            "Link": "https://601.sandhost.qzz.io/mlb.m3u8"
         },
         {
-            "Id": "8",
+            "Id": "14",
             "Rivels": "Seattle Mariners vs Detroit Tigers",
             "Title": "MLB (S-1)",
             "Link": "https://601.sandhost.qzz.io/mlb2.m3u8"
         },
         {
-            "Id": "9",
+            "Id": "15",
             "Rivels": "Chicago White Sox vs Philadelphia Phillies",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb3.m3u8"
         },
         {
-            "Id": "10",
+            "Id": "16",
             "Rivels": "Boston Red Sox vs New York Yankees",
             "Title": "MLB (S-1)",
-            "Link": "https://601.thelistener.pk/mlb4.m3u8"
+            "Link": "https://601.sandhost.qzz.io/mlb4.m3u8"
         },
         {
-            "Id": "11",
+            "Id": "17",
             "Rivels": "Baltimore Orioles vs Toronto Blue Jays",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb5.m3u8"
         },
         {
-            "Id": "12",
+            "Id": "18",
             "Rivels": "Tampa Bay Rays vs Miami Marlins",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb6.m3u8"
         },
         {
-            "Id": "13",
+            "Id": "19",
             "Rivels": "Pittsburgh Pirates vs Atlanta Braves",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb7.m3u8"
         },
         {
-            "Id": "14",
+            "Id": "20",
             "Rivels": "Athletics vs Houston Astros",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb8.m3u8"
         },
         {
-            "Id": "15",
+            "Id": "21",
             "Rivels": "Cincinnati Reds vs St. Louis Cardinals",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb9.m3u8"
         },
         {
-            "Id": "16",
+            "Id": "22",
             "Rivels": "Cleveland Guardians vs Texas Rangers",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb10.m3u8"
         },
         {
-            "Id": "17",
+            "Id": "23",
             "Rivels": "Kansas City Royals vs Minnesota Twins",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb11.m3u8"
         },
         {
-            "Id": "18",
+            "Id": "24",
             "Rivels": "Milwaukee Brewers vs Colorado Rockies",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb12.m3u8"
         },
         {
-            "Id": "19",
+            "Id": "25",
             "Rivels": "Washington Nationals vs Arizona Diamondbacks",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb13.m3u8"
         },
         {
-            "Id": "20",
+            "Id": "26",
             "Rivels": "New York Mets vs San Diego Padres",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb14.m3u8"
         },
         {
-            "Id": "21",
+            "Id": "27",
             "Rivels": "Los Angeles Angels vs Los Angeles Dodgers",
             "Title": "MLB (S-1)",
             "Link": "https://601.formaturamaxi.com.br/mlb15.m3u8"
         },
         {
-            "Id": "22",
+            "Id": "28",
             "Rivels": "Carolina Hurricanes vs Vegas Golden Knights",
             "Title": "NHL (S-1)",
             "Link": "https://601.thelistener.pk/nhl.m3u8"
         },
         {
-            "Id": "23",
+            "Id": "29",
             "Rivels": "Carolina Hurricanes vs Vegas Golden Knights",
             "Title": "NHL (S-2)",
-            "Link": "https://daffodil.formaturamaxi.com.br/nhl.m3u8"
+            "Link": "https://daffodil.sandhost.qzz.io/nhl.m3u8"
         },
         {
-            "Id": "24",
+            "Id": "30",
             "Rivels": "WWE Smackdown",
             "Title": "Fighting (S-1)",
-            "Link": "https://daffodil.sandhost.qzz.io/wwe.m3u8"
+            "Link": "https://daffodil.formaturamaxi.com.br/wwe.m3u8"
         }
     ]
 }
