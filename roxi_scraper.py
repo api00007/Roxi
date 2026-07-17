@@ -79,7 +79,7 @@ def run_scraper():
     all_live_matches = []
     
     try:
-        dom_res = scraper.get(f"{BASE_URL}/domainsz44.txt", timeout=15)
+        dom_res = scraper.get(f"{BASE_URL}/domainsz58.txt", timeout=15)
         domains_list = [d.strip() for d in dom_res.text.split('\n') if d.strip()]
     except:
         domains_list = ["formaturamaxi.com.br", "sman1asjap.my.id"]
